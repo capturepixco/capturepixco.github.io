@@ -1,0 +1,594 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Capture Pix Co. | Premium Photobooth Experiences</title>
+    
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Montserrat:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+    
+    <!-- Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        display: ['Montserrat', 'sans-serif'],
+                    },
+                    colors: {
+                        cpc: {
+                            teal: '#1b5e67',
+                            tealDark: '#124147',
+                            magenta: '#E81C7E',
+                            orange: '#F05A28',
+                            cream: '#fcfaf8',
+                            light: '#f1ede9'
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        /* Custom Styles for smooth animations */
+        .fade-in-up {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+        }
+        .fade-in-up.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        .hero-overlay {
+            background: linear-gradient(to right, rgba(18, 65, 71, 0.85), rgba(18, 65, 71, 0.4));
+        }
+
+        .text-gradient {
+            background: linear-gradient(to right, #E81C7E, #F05A28);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .bg-gradient-custom {
+            background: linear-gradient(135deg, #E81C7E, #F05A28);
+        }
+
+        /* Hide scrollbar for gallery but keep functionality */
+        .no-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+        .no-scrollbar {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+    </style>
+</head>
+<body class="font-sans antialiased text-gray-800 bg-cpc-cream">
+
+    <!-- Navigation -->
+    <nav id="navbar" class="fixed w-full z-50 transition-all duration-300 bg-transparent py-4">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center">
+                <div class="flex items-center">
+                    <a href="#" class="text-xl sm:text-2xl font-display font-black text-white tracking-widest flex items-center gap-2 uppercase" id="nav-logo">
+                        <i class="fa-solid fa-camera text-cpc-magenta"></i>
+                        Capture Pix Co.
+                    </a>
+                </div>
+                
+                <!-- Desktop Menu -->
+                <div class="hidden md:flex space-x-8 items-center">
+                    <a href="#services" class="text-sm font-semibold text-gray-200 hover:text-cpc-orange transition-colors nav-link tracking-wide uppercase">Services</a>
+                    <a href="#experience" class="text-sm font-semibold text-gray-200 hover:text-cpc-orange transition-colors nav-link tracking-wide uppercase">Experience</a>
+                    <a href="#gallery" class="text-sm font-semibold text-gray-200 hover:text-cpc-orange transition-colors nav-link tracking-wide uppercase">Gallery</a>
+                    <a href="#contact" class="px-6 py-2.5 rounded-full bg-gradient-custom text-white font-bold text-sm hover:opacity-90 transition-all shadow-lg hover:shadow-xl transform hover:-translate-y-0.5 tracking-wide uppercase">Book Now</a>
+                </div>
+
+                <!-- Mobile Menu Button -->
+                <div class="md:hidden flex items-center">
+                    <button id="mobile-menu-btn" class="text-white hover:text-cpc-orange focus:outline-none">
+                        <i class="fa-solid fa-bars text-2xl"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Mobile Menu -->
+        <div id="mobile-menu" class="hidden md:hidden bg-cpc-tealDark absolute top-full left-0 w-full shadow-xl">
+            <div class="px-4 pt-2 pb-6 space-y-1">
+                <a href="#services" class="block px-3 py-3 text-base font-bold tracking-wide uppercase text-gray-300 hover:text-white hover:bg-cpc-teal rounded-md mobile-link">Services</a>
+                <a href="#experience" class="block px-3 py-3 text-base font-bold tracking-wide uppercase text-gray-300 hover:text-white hover:bg-cpc-teal rounded-md mobile-link">Experience</a>
+                <a href="#gallery" class="block px-3 py-3 text-base font-bold tracking-wide uppercase text-gray-300 hover:text-white hover:bg-cpc-teal rounded-md mobile-link">Gallery</a>
+                <a href="#contact" class="block px-3 py-3 mt-4 text-center text-base font-bold tracking-wide uppercase bg-gradient-custom text-white rounded-md hover:opacity-90 mobile-link">Book Now</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <header class="relative h-screen flex items-center justify-center overflow-hidden">
+        <!-- Background Image -->
+        <div class="absolute inset-0 z-0 bg-cover bg-center bg-no-repeat" style="background-image: url('https://images.unsplash.com/photo-1511795409834-ef04bbd61622?q=80&w=2069&auto=format&fit=crop');">
+            <div class="absolute inset-0 hero-overlay"></div>
+        </div>
+
+        <div class="relative z-10 text-center px-4 sm:px-6 lg:px-8 max-w-4xl mx-auto mt-16 fade-in-up">
+            <span class="block text-cpc-orange font-bold tracking-widest uppercase text-sm mb-4">Elevate Your Event</span>
+            <h1 class="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-display font-black text-white leading-tight mb-6 uppercase tracking-tight">
+                Capture <br /> <span class="text-gradient">The Moment</span>
+            </h1>
+            <p class="mt-4 text-lg sm:text-xl text-gray-200 mb-10 max-w-2xl mx-auto font-medium">
+                Premium digital iPad & DSLR photobooth experiences for private events. Instant sharing, custom keepsakes, and unforgettable moments.
+            </p>
+            <div class="flex flex-col sm:flex-row gap-4 justify-center">
+                <a href="#contact" class="px-8 py-4 rounded-full bg-gradient-custom text-white font-bold text-lg hover:opacity-90 transition-all shadow-lg transform hover:-translate-y-1 uppercase tracking-wide">
+                    Check Availability
+                </a>
+                <a href="#experience" class="px-8 py-4 rounded-full bg-transparent border-2 border-white text-white font-bold text-lg hover:bg-white hover:text-cpc-tealDark transition-all uppercase tracking-wide">
+                    Explore Features
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <!-- Introduction / Services -->
+    <section id="services" class="py-24 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+                <div class="fade-in-up relative">
+                    <!-- Decorative background element -->
+                    <div class="absolute -top-4 -left-4 w-32 h-32 bg-cpc-orange rounded-full mix-blend-multiply filter blur-2xl opacity-30"></div>
+                    <div class="absolute -bottom-4 -right-4 w-32 h-32 bg-cpc-magenta rounded-full mix-blend-multiply filter blur-2xl opacity-30"></div>
+                    <img src="https://images.unsplash.com/photo-1621360841013-c76831f421f1?q=80&w=2000&auto=format&fit=crop" alt="Modern Photobooth Setup" class="rounded-3xl shadow-2xl relative z-10 w-full object-cover h-[500px]" />
+                    
+                    <!-- Floating badge -->
+                    <div class="absolute -bottom-6 -right-6 bg-cpc-tealDark text-white p-6 rounded-2xl shadow-xl z-20 hidden md:block border-b-4 border-cpc-magenta">
+                        <div class="flex items-center gap-4">
+                            <div class="w-12 h-12 rounded-full bg-gradient-custom flex items-center justify-center">
+                                <i class="fa-solid fa-star text-white"></i>
+                            </div>
+                            <div>
+                                <p class="font-display font-bold text-lg uppercase">Premium Setup</p>
+                                <p class="text-sm text-gray-300">Sleek & Unobtrusive</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="fade-in-up">
+                    <h2 class="text-sm font-bold text-cpc-magenta uppercase tracking-widest mb-2">Our Service</h2>
+                    <h3 class="text-3xl sm:text-4xl font-display font-black text-cpc-tealDark mb-6 uppercase tracking-tight">The Modern Mobile Photobooth</h3>
+                    <p class="text-gray-600 mb-6 leading-relaxed text-lg">
+                        Say goodbye to cramped, ugly box booths. We bring a sleek, open-air studio experience directly to your private event. Combining the professional quality of a DSLR camera with the interactive ease of an iPad interface, we capture your guests at their absolute best.
+                    </p>
+                    <p class="text-gray-600 mb-8 leading-relaxed text-lg">
+                        Perfect for weddings, corporate galas, milestone birthdays, and exclusive private parties. We handle the setup, styling, and operation—you and your guests simply bring the smiles.
+                    </p>
+                    
+                    <ul class="space-y-4 mb-8">
+                        <li class="flex items-center text-cpc-tealDark font-bold text-lg">
+                            <i class="fa-solid fa-circle-check text-cpc-orange mr-3 text-xl"></i> Dedicated on-site attendant
+                        </li>
+                        <li class="flex items-center text-cpc-tealDark font-bold text-lg">
+                            <i class="fa-solid fa-circle-check text-cpc-magenta mr-3 text-xl"></i> Custom start screens & overlays
+                        </li>
+                        <li class="flex items-center text-cpc-tealDark font-bold text-lg">
+                            <i class="fa-solid fa-circle-check text-cpc-orange mr-3 text-xl"></i> High-speed dye-sublimation printing
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- The Experience / Features -->
+    <section id="experience" class="py-24 bg-cpc-cream relative">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center max-w-3xl mx-auto mb-16 fade-in-up">
+                <h2 class="text-sm font-bold text-cpc-orange uppercase tracking-widest mb-2">Features</h2>
+                <h3 class="text-3xl sm:text-4xl font-display font-black text-cpc-tealDark mb-4 uppercase tracking-tight">Curated Experiences & Keepsakes</h3>
+                <p class="text-gray-600 text-lg">We blend classic print nostalgia with modern digital convenience, ensuring every guest leaves with a memory they can hold and share.</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+                <!-- Feature 1 -->
+                <div class="bg-white p-8 rounded-3xl shadow-sm hover:shadow-xl transition-all duration-300 fade-in-up border-b-4 border-transparent hover:border-cpc-magenta group">
+                    <div class="w-16 h-16 rounded-2xl bg-cpc-light flex items-center justify-center mb-6 group-hover:bg-gradient-custom group-hover:text-white transition-all duration-300">
+                        <i class="fa-solid fa-camera-retro text-3xl text-cpc-teal group-hover:text-white transition-colors"></i>
+                    </div>
+                    <h4 class="text-xl font-display font-bold text-cpc-tealDark mb-3 uppercase">DSLR + iPad Studio</h4>
+                    <p class="text-gray-600 text-sm leading-relaxed">
+                        Studio-grade lighting and DSLR lenses capture stunning, high-resolution imagery, while our intuitive iPad interface lets guests preview and control their session easily.
+                    </p>
+                </div>
+
+                <!-- Feature 2 -->
+                <div class="bg-white p-8 rounded-3xl shadow-sm hover:shadow-xl transition-all duration-300 fade-in-up border-b-4 border-transparent hover:border-cpc-orange group" style="transition-delay: 100ms;">
+                    <div class="w-16 h-16 rounded-2xl bg-cpc-light flex items-center justify-center mb-6 group-hover:bg-gradient-custom group-hover:text-white transition-all duration-300">
+                        <i class="fa-solid fa-mobile-screen-button text-3xl text-cpc-teal group-hover:text-white transition-colors"></i>
+                    </div>
+                    <h4 class="text-xl font-display font-bold text-cpc-tealDark mb-3 uppercase">Digital Delivery</h4>
+                    <p class="text-gray-600 text-sm leading-relaxed">
+                        In the era of social media, speed is everything. Guests receive a digital link to their personalized photos instantly via SMS Text or Apple AirDrop.
+                    </p>
+                </div>
+
+                <!-- Feature 3 -->
+                <div class="bg-white p-8 rounded-3xl shadow-sm hover:shadow-xl transition-all duration-300 fade-in-up border-b-4 border-transparent hover:border-cpc-magenta group" style="transition-delay: 200ms;">
+                    <div class="w-16 h-16 rounded-2xl bg-cpc-light flex items-center justify-center mb-6 group-hover:bg-gradient-custom group-hover:text-white transition-all duration-300">
+                        <i class="fa-solid fa-print text-3xl text-cpc-teal group-hover:text-white transition-colors"></i>
+                    </div>
+                    <h4 class="text-xl font-display font-bold text-cpc-tealDark mb-3 uppercase">Personalized Prints</h4>
+                    <p class="text-gray-600 text-sm leading-relaxed">
+                        Tangible memories matter. We design beautiful, personalized templates matching your event's theme for instant, high-quality physical printouts.
+                    </p>
+                </div>
+
+                <!-- Feature 4 -->
+                <div class="bg-white p-8 rounded-3xl shadow-sm hover:shadow-xl transition-all duration-300 fade-in-up border-b-4 border-transparent hover:border-cpc-orange group" style="transition-delay: 300ms;">
+                    <div class="w-16 h-16 rounded-2xl bg-cpc-light flex items-center justify-center mb-6 group-hover:bg-gradient-custom group-hover:text-white transition-all duration-300">
+                        <i class="fa-solid fa-masks-theater text-3xl text-cpc-teal group-hover:text-white transition-colors"></i>
+                    </div>
+                    <h4 class="text-xl font-display font-bold text-cpc-tealDark mb-3 uppercase">Premium Backdrops</h4>
+                    <p class="text-gray-600 text-sm leading-relaxed">
+                        Set the stage with our tension-fabric backdrops. Choose between classic, sophisticated Black or clean, crisp White to perfectly complement your venue.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Gallery Section -->
+    <section id="gallery" class="py-24 bg-cpc-tealDark text-white relative">
+        <!-- Decorative subtle pattern/overlay could go here -->
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+            <div class="flex flex-col md:flex-row justify-between items-end mb-12 fade-in-up">
+                <div class="max-w-2xl">
+                    <h2 class="text-sm font-bold text-cpc-magenta uppercase tracking-widest mb-2">Gallery</h2>
+                    <h3 class="text-3xl sm:text-4xl font-display font-black mb-4 uppercase tracking-tight">Picture Perfect Moments</h3>
+                    <p class="text-gray-300 text-lg">A glimpse into the joy, laughter, and premium aesthetic we bring to every celebration.</p>
+                </div>
+                <div class="mt-6 md:mt-0">
+                    <a href="https://instagram.com" target="_blank" class="flex items-center gap-2 text-cpc-orange hover:text-white transition-colors font-bold uppercase tracking-wide">
+                        View on Instagram <i class="fa-solid fa-arrow-right"></i>
+                    </a>
+                </div>
+            </div>
+
+            <!-- CSS Grid Gallery -->
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-4 auto-rows-[200px]">
+                <!-- Large featured image -->
+                <div class="col-span-2 row-span-2 rounded-3xl overflow-hidden relative group fade-in-up border-2 border-transparent hover:border-cpc-magenta transition-colors duration-300">
+                    <img src="https://images.unsplash.com/photo-1520854221256-17451cc331bf?q=80&w=2000&auto=format&fit=crop" alt="Wedding Guests" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" />
+                    <div class="absolute inset-0 bg-cpc-tealDark/40 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
+                        <i class="fa-brands fa-instagram text-5xl text-white"></i>
+                    </div>
+                </div>
+                <!-- Standard images -->
+                <div class="rounded-3xl overflow-hidden relative group fade-in-up border-2 border-transparent hover:border-cpc-orange transition-colors duration-300">
+                    <img src="https://images.unsplash.com/photo-1574720915609-b6903f6f1a8e?q=80&w=1000&auto=format&fit=crop" alt="Photobooth Prints" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" />
+                </div>
+                <div class="rounded-3xl overflow-hidden relative group fade-in-up border-2 border-transparent hover:border-cpc-magenta transition-colors duration-300">
+                    <img src="https://images.unsplash.com/photo-1516997184976-13eb67b6bfb1?q=80&w=1000&auto=format&fit=crop" alt="Friends having fun" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" />
+                </div>
+                <div class="rounded-3xl overflow-hidden relative group fade-in-up border-2 border-transparent hover:border-cpc-orange transition-colors duration-300">
+                    <img src="https://images.unsplash.com/photo-1530103862676-de3c9de59a9f?q=80&w=1000&auto=format&fit=crop" alt="Event Setup" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" />
+                </div>
+                <div class="rounded-3xl overflow-hidden relative group fade-in-up border-2 border-transparent hover:border-cpc-magenta transition-colors duration-300">
+                    <img src="https://images.unsplash.com/photo-1478146896981-b80fe463b330?q=80&w=1000&auto=format&fit=crop" alt="Party" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" />
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact & Booking Section -->
+    <section id="contact" class="py-24 bg-white relative overflow-hidden">
+        <!-- Background decorative blobs -->
+        <div class="absolute top-0 right-0 w-96 h-96 bg-cpc-orange rounded-full mix-blend-multiply filter blur-[100px] opacity-20 -translate-y-1/2 translate-x-1/2"></div>
+        <div class="absolute bottom-0 left-0 w-72 h-72 bg-cpc-magenta rounded-full mix-blend-multiply filter blur-[100px] opacity-20 translate-y-1/2 -translate-x-1/2"></div>
+
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+            <div class="bg-white rounded-[2rem] shadow-2xl overflow-hidden border border-gray-100 fade-in-up">
+                <div class="grid grid-cols-1 lg:grid-cols-5">
+                    
+                    <!-- Contact Info / Promo side -->
+                    <div class="bg-cpc-teal text-white p-10 lg:p-14 lg:col-span-2 flex flex-col justify-between relative overflow-hidden">
+                        <div class="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1519225421980-715cb0215aed?q=80&w=2000&auto=format&fit=crop')] bg-cover bg-center opacity-10 mix-blend-overlay"></div>
+                        
+                        <div class="relative z-10">
+                            <h3 class="text-3xl font-display font-black mb-4 uppercase tracking-tight">Reserve Your Date</h3>
+                            <p class="text-cpc-light mb-8 font-medium leading-relaxed">
+                                Our calendar fills up quickly for peak wedding and holiday seasons. Fill out the form, and we'll get back to you within 24 hours to craft your perfect package.
+                            </p>
+                            
+                            <div class="space-y-6">
+                                <div class="flex items-start gap-4">
+                                    <div class="w-12 h-12 rounded-full bg-cpc-tealDark flex items-center justify-center shrink-0">
+                                        <i class="fa-solid fa-envelope text-cpc-magenta text-lg"></i>
+                                    </div>
+                                    <div class="pt-1">
+                                        <p class="text-xs text-gray-300 font-bold uppercase tracking-wider">Email Us</p>
+                                        <p class="font-bold text-lg">capturepixco@gmail.com</p>
+                                    </div>
+                                </div>
+                                <div class="flex items-start gap-4">
+                                    <div class="w-12 h-12 rounded-full bg-cpc-tealDark flex items-center justify-center shrink-0">
+                                        <i class="fa-brands fa-instagram text-cpc-orange text-lg"></i>
+                                    </div>
+                                    <div class="pt-1">
+                                        <p class="text-xs text-gray-300 font-bold uppercase tracking-wider">Instagram</p>
+                                        <p class="font-bold text-lg">@capturepixco</p>
+                                    </div>
+                                </div>
+                                <div class="flex items-start gap-4">
+                                    <div class="w-12 h-12 rounded-full bg-cpc-tealDark flex items-center justify-center shrink-0">
+                                        <i class="fa-solid fa-location-dot text-cpc-magenta text-lg"></i>
+                                    </div>
+                                    <div class="pt-1">
+                                        <p class="text-xs text-gray-300 font-bold uppercase tracking-wider">Service Area</p>
+                                        <p class="font-bold text-base">Halton Area (Burlington, Oakville, Milton, Hamilton)</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="mt-12 relative z-10 bg-cpc-tealDark/50 p-6 rounded-2xl border-l-4 border-cpc-orange">
+                            <p class="text-base font-bold italic text-white mb-2">"The absolute highlight of our reception!"</p>
+                            <p class="text-sm text-cpc-light font-medium">— Sarah & James, Wedding Client</p>
+                        </div>
+                    </div>
+
+                    <!-- Form Side -->
+                    <div class="p-10 lg:p-14 lg:col-span-3">
+                        <form id="bookingForm" class="space-y-6">
+                            <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                                <div>
+                                    <label for="firstName" class="block text-xs font-bold uppercase tracking-wider text-cpc-tealDark mb-2">First Name</label>
+                                    <input type="text" id="firstName" required class="w-full px-4 py-3 rounded-xl border-2 border-gray-100 focus:border-cpc-magenta focus:ring-0 outline-none transition-all bg-gray-50 focus:bg-white font-medium">
+                                </div>
+                                <div>
+                                    <label for="lastName" class="block text-xs font-bold uppercase tracking-wider text-cpc-tealDark mb-2">Last Name</label>
+                                    <input type="text" id="lastName" required class="w-full px-4 py-3 rounded-xl border-2 border-gray-100 focus:border-cpc-orange focus:ring-0 outline-none transition-all bg-gray-50 focus:bg-white font-medium">
+                                </div>
+                            </div>
+
+                            <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                                <div>
+                                    <label for="email" class="block text-xs font-bold uppercase tracking-wider text-cpc-tealDark mb-2">Email Address</label>
+                                    <input type="email" id="email" required class="w-full px-4 py-3 rounded-xl border-2 border-gray-100 focus:border-cpc-magenta focus:ring-0 outline-none transition-all bg-gray-50 focus:bg-white font-medium">
+                                </div>
+                                <div>
+                                    <label for="phone" class="block text-xs font-bold uppercase tracking-wider text-cpc-tealDark mb-2">Phone Number</label>
+                                    <input type="tel" id="phone" class="w-full px-4 py-3 rounded-xl border-2 border-gray-100 focus:border-cpc-orange focus:ring-0 outline-none transition-all bg-gray-50 focus:bg-white font-medium">
+                                </div>
+                            </div>
+
+                            <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                                <div>
+                                    <label for="eventDate" class="block text-xs font-bold uppercase tracking-wider text-cpc-tealDark mb-2">Event Date</label>
+                                    <input type="date" id="eventDate" required class="w-full px-4 py-3 rounded-xl border-2 border-gray-100 focus:border-cpc-magenta focus:ring-0 outline-none transition-all bg-gray-50 focus:bg-white text-gray-700 font-medium">
+                                </div>
+                                <div>
+                                    <label for="eventType" class="block text-xs font-bold uppercase tracking-wider text-cpc-tealDark mb-2">Event Type</label>
+                                    <select id="eventType" class="w-full px-4 py-3 rounded-xl border-2 border-gray-100 focus:border-cpc-orange focus:ring-0 outline-none transition-all bg-gray-50 focus:bg-white text-gray-700 font-medium appearance-none">
+                                        <option value="" disabled selected>Select Event Type</option>
+                                        <option value="wedding">Wedding</option>
+                                        <option value="corporate">Corporate Event</option>
+                                        <option value="birthday">Birthday/Milestone</option>
+                                        <option value="other">Other Private Event</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div>
+                                <label class="block text-xs font-bold uppercase tracking-wider text-cpc-tealDark mb-3">Preferred Backdrop Color</label>
+                                <div class="flex flex-wrap gap-6">
+                                    <label class="flex items-center gap-3 cursor-pointer group">
+                                        <div class="relative flex items-center justify-center">
+                                            <input type="radio" name="backdrop" value="black" class="peer appearance-none w-5 h-5 border-2 border-gray-300 rounded-full checked:border-cpc-teal transition-all">
+                                            <div class="absolute w-2.5 h-2.5 rounded-full bg-cpc-teal opacity-0 peer-checked:opacity-100 transition-all"></div>
+                                        </div>
+                                        <span class="text-gray-600 font-medium group-hover:text-cpc-tealDark transition-colors">Classic Black</span>
+                                    </label>
+                                    <label class="flex items-center gap-3 cursor-pointer group">
+                                        <div class="relative flex items-center justify-center">
+                                            <input type="radio" name="backdrop" value="white" class="peer appearance-none w-5 h-5 border-2 border-gray-300 rounded-full checked:border-cpc-teal transition-all">
+                                            <div class="absolute w-2.5 h-2.5 rounded-full bg-cpc-teal opacity-0 peer-checked:opacity-100 transition-all"></div>
+                                        </div>
+                                        <span class="text-gray-600 font-medium group-hover:text-cpc-tealDark transition-colors">Crisp White</span>
+                                    </label>
+                                    <label class="flex items-center gap-3 cursor-pointer group">
+                                        <div class="relative flex items-center justify-center">
+                                            <input type="radio" name="backdrop" value="undecided" class="peer appearance-none w-5 h-5 border-2 border-gray-300 rounded-full checked:border-cpc-teal transition-all" checked>
+                                            <div class="absolute w-2.5 h-2.5 rounded-full bg-cpc-teal opacity-0 peer-checked:opacity-100 transition-all"></div>
+                                        </div>
+                                        <span class="text-gray-600 font-medium group-hover:text-cpc-tealDark transition-colors">Decide Later</span>
+                                    </label>
+                                </div>
+                            </div>
+
+                            <div>
+                                <label for="message" class="block text-xs font-bold uppercase tracking-wider text-cpc-tealDark mb-2">Tell us about your event details</label>
+                                <textarea id="message" rows="4" class="w-full px-4 py-3 rounded-xl border-2 border-gray-100 focus:border-cpc-magenta focus:ring-0 outline-none transition-all bg-gray-50 focus:bg-white resize-none font-medium" placeholder="Location, estimated guest count, theme..."></textarea>
+                            </div>
+
+                            <button type="submit" class="w-full py-4 rounded-xl bg-gradient-custom text-white font-bold text-lg hover:opacity-90 transition-opacity shadow-lg flex justify-center items-center gap-2 group uppercase tracking-wide">
+                                Send Inquiry
+                                <i class="fa-solid fa-paper-plane group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform"></i>
+                            </button>
+                        </form>
+
+                        <!-- Custom Success Message (Hidden by default) -->
+                        <div id="successMessage" class="hidden mt-6 p-6 rounded-2xl bg-green-50 border-2 border-green-200 text-green-800 flex items-start gap-4">
+                            <i class="fa-solid fa-circle-check text-2xl mt-0.5 text-green-600"></i>
+                            <div>
+                                <h4 class="font-bold text-lg uppercase tracking-tight">Inquiry Sent Successfully!</h4>
+                                <p class="text-sm mt-2 font-medium">Thank you for reaching out to Capture Pix Co. We will review your details and email you shortly regarding your event date.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-cpc-tealDark text-gray-400 py-12 border-t-4 border-cpc-teal">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8 items-center">
+                <!-- Brand -->
+                <div class="text-center md:text-left">
+                    <a href="#" class="text-2xl font-display font-black text-white tracking-widest flex items-center justify-center md:justify-start gap-2 mb-2 uppercase">
+                        <i class="fa-solid fa-camera text-cpc-magenta"></i>
+                        Capture Pix Co.
+                    </a>
+                    <p class="text-sm font-medium">Premium Photobooth Experiences</p>
+                </div>
+                
+                <!-- Links -->
+                <div class="flex justify-center space-x-6">
+                    <a href="#" class="font-bold uppercase tracking-wider text-sm hover:text-cpc-orange transition-colors">Home</a>
+                    <a href="#services" class="font-bold uppercase tracking-wider text-sm hover:text-cpc-orange transition-colors">Services</a>
+                    <a href="#gallery" class="font-bold uppercase tracking-wider text-sm hover:text-cpc-orange transition-colors">Gallery</a>
+                </div>
+
+                <!-- Socials -->
+                <div class="flex justify-center md:justify-end space-x-4">
+                    <a href="#" class="w-10 h-10 rounded-full bg-cpc-teal flex items-center justify-center hover:bg-cpc-magenta hover:text-white transition-colors text-white">
+                        <i class="fa-brands fa-instagram"></i>
+                    </a>
+                    <a href="#" class="w-10 h-10 rounded-full bg-cpc-teal flex items-center justify-center hover:bg-cpc-orange hover:text-white transition-colors text-white">
+                        <i class="fa-brands fa-facebook-f"></i>
+                    </a>
+                    <a href="#" class="w-10 h-10 rounded-full bg-cpc-teal flex items-center justify-center hover:bg-cpc-magenta hover:text-white transition-colors text-white">
+                        <i class="fa-brands fa-tiktok"></i>
+                    </a>
+                </div>
+            </div>
+            
+            <div class="mt-12 pt-8 border-t border-cpc-teal text-center text-sm flex flex-col md:flex-row justify-between items-center font-medium">
+                <p>&copy; <span id="year"></span> Capture Pix Co. All rights reserved.</p>
+                <div class="mt-4 md:mt-0 space-x-4">
+                    <a href="#" class="hover:text-white transition-colors">Privacy Policy</a>
+                    <a href="#" class="hover:text-white transition-colors">Terms of Service</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script>
+        // Set dynamic year
+        document.getElementById('year').textContent = new Date().getFullYear();
+
+        // Navbar Scroll Effect
+        const navbar = document.getElementById('navbar');
+        const navLogo = document.getElementById('nav-logo');
+        const navLinks = document.querySelectorAll('.nav-link');
+        const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 50) {
+                navbar.classList.remove('bg-transparent', 'py-4');
+                navbar.classList.add('bg-white', 'py-3', 'shadow-md');
+                
+                // Change text colors for light background
+                navLogo.classList.remove('text-white');
+                navLogo.classList.add('text-cpc-tealDark');
+                
+                navLinks.forEach(link => {
+                    link.classList.remove('text-gray-200');
+                    link.classList.add('text-gray-600');
+                });
+                mobileMenuBtn.classList.remove('text-white');
+                mobileMenuBtn.classList.add('text-cpc-tealDark');
+
+            } else {
+                navbar.classList.add('bg-transparent', 'py-4');
+                navbar.classList.remove('bg-white', 'py-3', 'shadow-md');
+                
+                // Revert text colors for transparent background
+                navLogo.classList.add('text-white');
+                navLogo.classList.remove('text-cpc-tealDark');
+                
+                navLinks.forEach(link => {
+                    link.classList.add('text-gray-200');
+                    link.classList.remove('text-gray-600');
+                });
+                mobileMenuBtn.classList.add('text-white');
+                mobileMenuBtn.classList.remove('text-cpc-tealDark');
+            }
+        });
+
+        // Mobile Menu Toggle
+        const mobileMenu = document.getElementById('mobile-menu');
+        const mobileLinks = document.querySelectorAll('.mobile-link');
+
+        mobileMenuBtn.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+        });
+
+        mobileLinks.forEach(link => {
+            link.addEventListener('click', () => {
+                mobileMenu.classList.add('hidden');
+            });
+        });
+
+        // Intersection Observer for Scroll Animations
+        const observerOptions = {
+            root: null,
+            rootMargin: '0px',
+            threshold: 0.15
+        };
+
+        const observer = new IntersectionObserver((entries, observer) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                    observer.unobserve(entry.target); // Run once
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.fade-in-up').forEach(element => {
+            observer.observe(element);
+        });
+
+        // Form Submission Handler
+        const bookingForm = document.getElementById('bookingForm');
+        const successMessage = document.getElementById('successMessage');
+
+        bookingForm.addEventListener('submit', (e) => {
+            e.preventDefault(); // Prevent page reload
+            
+            // In a real scenario, you would send data to a backend here.
+            // For now, we simulate a successful submission.
+            
+            // Hide form, show success message
+            bookingForm.style.opacity = '0.5';
+            bookingForm.style.pointerEvents = 'none';
+            
+            const btn = bookingForm.querySelector('button[type="submit"]');
+            const originalText = btn.innerHTML;
+            btn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> Sending...';
+
+            setTimeout(() => {
+                bookingForm.style.display = 'none';
+                successMessage.classList.remove('hidden');
+                successMessage.classList.add('fade-in-up', 'visible');
+            }, 1000);
+        });
+
+    </script>
+</body>
+</html>
